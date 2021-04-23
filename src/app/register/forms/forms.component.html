@@ -1,0 +1,114 @@
+<div class="container">
+    <form [formGroup]="registerForm">
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="email" placeholder="Email" [formControl]="username">
+            </div>
+            <div [hidden]="username.valid||username.untouched">
+                <div class="alert alert-danger">
+                    *Some Problems with name
+                    <div [hidden]="!username.hasError('required')">
+                        -Username is manadatory field
+
+                    </div>
+                    <div [hidden]="!username.hasError('email')">
+                        -Invalid Email Format
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" placeholder="Password"
+                    [formControl]="password">
+            </div>
+            <div [hidden]="password.valid||password.untouched">
+                <div class="alert alert-danger">
+                    *Some Problems with password
+                    <div [hidden]="!password.hasError('required')">
+                        -Password is manadatory filed
+                    </div>
+                    <div [hidden]="!password.hasError('minlength')">
+                        -Must be gretaer than 6
+
+                    </div>
+                    <div [hidden]="!password.hasError('pattern')">
+                        -must contain a symbol
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label for="cpassword" class="col-sm-2 col-form-label">Confirm Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password"
+                    [formControl]="cpassword">
+            </div>
+            <div [hidden]="cpassword.valid||cpassword.untouched">
+                <div class="alert alert-danger">
+                    *Confirm Password
+                    <div [hidden]="!cpassword.hasError('required')">
+                        -Password is manadatory filed
+                    </div>
+                    <!-- <div *ngIf="f.cpassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.cpassword.errors.mustMatch">Passwords must match</div> -->
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <div>
+                <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+                <label for="male">Male</label>
+            </div>
+
+            <div>
+                <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+                <label for="female">Female</label>
+            </div>
+
+            <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
+                <div *ngIf="f.gender.errors.required">Name is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group"> Address
+            <select class="custom-select" (change)="changeCity($event)" formControlName="cityName">
+                <option value="" disabled>Choose your city</option>
+                <option *ngFor="let city of City" [ngValue]="city">{{city}}</option>
+
+            </select>
+            <!-- error block -->
+            <div class="invalid-feedback" *ngIf="!cityName.hasError('required')">
+                <sup>*</sup>Please enter your city name
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Mobile Number</label>
+            <input formControlName="phone" id="phone" type="tel" class="form-control"
+                value="XXXX-XXX-XXX ui-us-phone-number-mask">
+            <div *ngIf="f.phone.touched && f.phone.invalid" class="alert alert-danger">
+                <div *ngIf="f.phone.errors.required">Mobile Number is required.</div>
+                <div *ngIf="f.phone.errors.pattern">Please, Enter 10 digit Mobile Number in XXXX-XXX-XXX.</div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"
+                    (click)=" onRegister()">Sign
+                    in</button>
+            </div>
+        </div>
+
+
+    </form>
+</div>

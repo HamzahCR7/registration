@@ -1,0 +1,11 @@
+<p>User with <strong>ID {{ id }}</strong> was loaded</p>
+<button class="btn btn-primary" (click)="onActivate()">Click Here</button>
+<hr>
+
+
+<input type="text" placeholder="Username" #uname>
+<button (click)="onUpdate(uname)">Update</button>
+<div>
+    <input type="text" placeholder="Username2" #name>
+    <button (click)="onUpdate2(name)">Update</button>
+</div>
